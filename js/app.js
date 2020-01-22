@@ -1,58 +1,87 @@
-$(() => {
-  const mwin = $(".m_modal_window");
-  const ovy = $(".m_modal_overlay");
-  const btnc = $(".m_modal_btn-close");
-  const mark = $(".org_modal_mark-close");
-  const win = $.merge(mwin, ovy);
-  $(mark).hide();
-  // $('.org_modal').hide();
+'use strict';
 
-  $(".m_modal_open").on("click", e => {
-    $(win).fadeIn();
-    $(mark).fadeIn();
-    // $('.org_modal').show();
-  });
+new Vue({
+  el: '#editor',
+  data: {
+    input: '# MarkDownEditor'
 
-  $.merge(btnc, ovy, mark).on("click", e => {
-    $(win).fadeOut();
-    $(mark).fadeOut();
-    // $('.org_modal').hide();
-  });
-
-  $(mark).on("click", e => {
-    $(win).fadeOut();
-    $(mark).fadeOut();
-    // $('.org_modal').hide();
-  });
-
-  $(".org_modal").on("click", e => {
-    e.stopPropagation();
-  });
-
-  $(".m_modal_btn-req").on("click", e => {
-    alert("実行しました");
-  });
-
-  locateCenter();
-  $(window).resize(locateCenter);
-
-  function locateCenter() {
-    const w = $(window).width();
-    const h = $(window).height();
-    const cw = $(mwin).outerWidth();
-    const ch = $(mwin).outerHeight();
-    const max = w / 1.2 + "px";
-    $(mwin).css({
-      maxWidth: max,
-      left: (w - cw) / 2 - max / 2 + "px",
-      top: (h - ch) / 2 + "px",
-      maxHeight: calc(h - 80) + "px"
-
-      // left: ((cw - ((cw - w) / 2))  / 2) + 10 + "px",
-      // top: "50%",
-      // height: "auto",
-      // boxSizing: "initial",
-      // width: ((cw - ((cw - w) / 2)) - 30 ) + "px",
-    });
+  },
+  computed: {
+    compiledMarkdown: function compiledMarkdown() {
+      return marked(this.input, {
+        sanitize: true
+      });
+    }
+  },
+  methods: {
+    update: _.debounce(function(e) {
+      this.input = e.target.value;
+    }, 10)
   }
+});
+
+function init() {
+  document.querySelector("#editor").addEventListener("input", function() {
+    function setItems(data) {
+      var data = {
+        name: document.querySelector("#name").value
+      };
+      return data;
+    }
+    localStorage.setItem("mkedotor", JSON.stringify(data));
+  }, false);
+}
+
+function init() {
+  var oldData = localStorage.getItem("mkedotor");
+  if (oldData) {
+    var realData = JSON.parse(oldData);
+    document.querySelector("#name").value = realData.name;
+  }
+  document.querySelector("#editor").addEventListener("input", function() {
+    var data = {
+      name: document.querySelector("#name").value
+    };
+    localStorage.setItem("mkedotor", JSON.stringify(data));
+  }, false);
+
+  $("#clear").click(function() {
+    var retVal = confirm("削除してよろしいでございますです?");
+    if (retVal == true) {
+      alert("削除しました!");
+      localStorage.removeItem("mkedotor");
+      $("this").attr("disabled", true);
+      document.querySelector("#name").value = "";
+      location.reload();
+      return true;
+    } else {
+      console.log('削除のキャンセル')
+      return false;
+    }
+  });
+}
+
+//
+$(function() {
+  if (typeof Blob !== "undefined") {
+    console.log('このブラウザに対応しています');
+  } else {
+    alert('このブラウザには対応していません');
+  }
+  $("#content").keyup(function() {
+    setBlobUrl("download", $("#content").val());
+  });
+  $("#content").keyup();
+});
+
+function setBlobUrl(id, content) {
+  var blob = new Blob([content], {
+    "type": "application/x-msdownload"
+  });
+  window.URL = window.URL || window.webkitURL;
+  $("#" + id).attr("href", window.URL.createObjectURL(blob));
+  $("#" + id).attr("download", "tmp.txt");
+}
+$(function() {
+  $('textarea').on('change input', function() {}).change();
 });

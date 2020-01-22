@@ -1,62 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="img/favicon.png" type="image/vnd.microsoft.icon">
-    <title>ザ脳と / テキストエディター</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="img/favicon.png" type="image/vnd.microsoft.icon">
+  <title>ザ脳と / テキストエディター</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   </link>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-</link>
-<link rel="stylesheet" href="css/style.css">
+  </link>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body onload="init()">
-<div id="editor">
-  <textarea name="name" id="name" :value="input" @input="update"></textarea>
-  <div v-html="compiledMarkdown"></div>
-</div>
-<div class="controllerArea">
-  <div class="authorArea">
-    <h1 class="logo">ザ脳と<br>MarkDown Editor</h1>
+  <div id="editor"> <textarea name="name" id="name" :value="input" @input="update"></textarea>
+    <div v-html="compiledMarkdown"></div>
   </div>
-  <button class="btn btn-danger" id="clear">Clear</button>
-  <p class="info">
-    データは個別のブラウザのローカルデータに自動保存されます<br>
-    入力エリアにフォーカス(クリック)しどこかでエンターを押せば復帰します
-  </p>
-  <div class="org_modal">
-    <div class="org_modal_mark-close">
-      <div class="m_modal_mark-close">
-        <span>x</span>
-      </div>
-    </div>
-    <button class="m_modal_open">Info</button>
-    <div class="m_modal_overlay"></div>
-    <div class="m_modal_window">
-      <div class="org_modal_inner">
-        <div class="a_modal_text">Template</div>
-        <div class="a_modal_text">Goal - DeadLine - 5W1H</div>
-        <ul>
-          <li>What</li>
-          <li>Why</li>
-          <li>Who</li>
-          <li>Where</li>
-          <li>When</li>
-          <li>How</li>
-        </ul>
-        
-        
-        
-      </div>
-      <div class="org_button">
-        <!-- <button class="m_modal_btn-req submit">Submit</button> -->
-        <button class="m_modal_btn-close cakcel">Close</button>
+  <div class="controllerArea">
+    <div class="authorArea">
+      <h1 class="logo">ザ脳と<br>MarkDown Editor</h1>
+    </div> <button class="btn btn-danger" id="clear">Clear</button>
+    <p class="info"> データは個別のブラウザのローカルデータに自動保存されます<br> 入力エリアにフォーカス(クリック)しどこかでエンターを押せば復帰します </p>
+    <div class="org_modal">
+      <div class="org_modal_mark-close">
+        <div class="m_modal_mark-close"> <span>x</span> </div>
+      </div> <button class="m_modal_open">Info</button>
+      <div class="m_modal_overlay"></div>
+      <div class="m_modal_window">
+        <div class="org_modal_inner">
+          <div class="a_modal_text">Template</div>
+          <div class="a_modal_text">Goal - DeadLine - 5W1H</div>
+          <ul>
+            <li>What</li>
+            <li>Why</li>
+            <li>Who</li>
+            <li>Where</li>
+            <li>When</li>
+            <li>How</li>
+          </ul>
+        </div>
+        <div class="org_button">
+          <!-- <button class="m_modal_btn-req submit">Submit</button> --> <button class="m_modal_btn-close cakcel">Close</button> </div>
       </div>
     </div>
   </div>
-</div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
@@ -65,93 +54,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="https://webmakerapp.com/app/lib/transpilers/babel-polyfill.min.js"></script>
 <script src="js/app.js"></script>
-<script>
-'use strict';
-new Vue({
-el: '#editor',
-data: {
-input: '# MarkDownEditor'
-},
-computed: {
-compiledMarkdown: function compiledMarkdown() {
-return marked(this.input, {
-sanitize: true
-});
-}
-},
-methods: {
-update: _.debounce(function(e) {
-this.input = e.target.value;
-}, 10)
-}
-});
-function init() {
-document.querySelector("#editor").addEventListener("input", function() {
-function setItems(data) {
-var data = {
-name: document.querySelector("#name").value
-};
-return data;
-}
-localStorage.setItem("mkedotor", JSON.stringify(data));
-}, false);
-}
-function init() {
-var oldData = localStorage.getItem("mkedotor");
-if (oldData) {
-var realData = JSON.parse(oldData);
-document.querySelector("#name").value = realData.name;
-}
-document.querySelector("#editor").addEventListener("input", function() {
-var data = {
-name: document.querySelector("#name").value
-};
-localStorage.setItem("mkedotor", JSON.stringify(data));
-}, false);
-$("#clear").click(function() {
-var retVal = confirm("削除してよろしいでございますです?");
-if (retVal == true) {
-alert("削除しました!");
-localStorage.removeItem("mkedotor");
-$("this").attr("disabled", true);
-document.querySelector("#name").value = "";
-location.reload();
-return true;
-} else {
-// alert("削除のキャンセルをしました");
-return false;
-}
-});
-}
-//
-$(function() {
-if (typeof Blob !== "undefined") {
-//  alert('このブラウザに対応しています');
-} else {
-alert('このブラウザには対応していません');
-}
-$("#content").keyup(function() {
-setBlobUrl("download", $("#content").val());
-});
-$("#content").keyup(); // 上で設定したkeyupイベント(setBlobUrl)を実行する
-});
-function setBlobUrl(id, content) {
-// 指定されたデータを保持するBlobを作成する。
-var blob = new Blob([content], {
-"type": "application/x-msdownload"
-});
-// Aタグのhref属性にBlobオブジェクトを設定する。
-window.URL = window.URL || window.webkitURL;
-$("#" + id).attr("href", window.URL.createObjectURL(blob));
-$("#" + id).attr("download", "tmp.txt");
-}
-$(function() {
-$('textarea').on('change input', function() {
-// alert();
-// $(this).css("backgroundColor","#ff0000");
-}).change();
-});
-//# sourceURL=userscript.js
-</script>
-</body>
+<script src="js/modal.js"></script>
+
 </html>
