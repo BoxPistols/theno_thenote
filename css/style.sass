@@ -1,0 +1,170 @@
+@charset "UTF-8"
+
+@import modal
+
+html,
+body,
+#editor
+  margin: 0
+  height: 100%
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif
+  color: #333
+  position: relative
+
+textarea,
+#editor div
+  margin: 0
+  display: inline-block
+  box-sizing: border-box
+  width: 50%
+  height: 100%
+  height: calc(100% - 50px)
+  vertical-align: top
+  box-sizing: border-box
+  padding: 15px
+  color: #fff
+  text-shadow: 1px 1px 1px #666
+
+textarea
+  width: 40%
+  float: left
+  border: none
+  border-right: 1px solid #ccc
+  resize: none
+  outline: none
+  background-color: #0b3a31
+
+  // background: linear-gradient(-45deg, rgba(7, 60, 35, 0.94), rgba(62, 12, 47, 0.88))
+  background-image: linear-gradient(-135deg, rgb(147, 245, 234), rgb(47, 29, 247))
+  font-size: 16px
+  padding: 20px
+  line-height: 1.4
+
+// View
+#editor div
+  width: 60%
+  float: right
+
+  // background: linear-gradient(-45deg, rgba(33, 32, 84, 0.7), rgba(101, 66, 30, 0.88))
+  background-image: linear-gradient(135deg, #f77f31 20%, #ffc46e 100%)
+  line-height: 1.5
+  overflow-x: scroll
+
+  code
+    color: #009688
+    background-color: #f9f9f99c
+    padding: 10px 5px
+    border: none
+    border-radius: 0px
+    padding: 2px
+    line-height: 1.2
+    text-shadow: 1px 1px 0 #ccc
+
+  h1
+    font-size: 3em
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5)
+    padding-bottom: 0.15em
+
+  h2
+    font-size: 2.2em
+
+  h3
+    font-size: 1.8em
+
+  h1 + h5
+    font-size: 3.5em
+
+    h1
+      font-size: 0
+
+  li
+    list-style-type: square
+    margin-left: 1.25em
+
+  p
+    line-height: 1.3
+
+  hr
+    border: dashed 1px rgba(255, 255, 255, 0.7)
+
+  em
+    font-weight: bold
+
+  ol li
+    list-style-type: decimal
+
+  a
+    color: #fff
+    border-bottom: 1px solid #fff
+    text-decoration: none
+    transition: 0.2s
+
+    &:hover
+      text-decoration: none
+      color: #daedff
+      border-bottom: 1px solid #7bc0ff
+
+// footer
+.controllerArea
+  display: flex
+  justify-content: center
+  align-items: center
+
+  // background-color: aliceblue
+  background-image: linear-gradient(-45deg, #f9da00fa, #20adffd1)
+
+  // border-top: 1px solid #fff
+  height: 50px
+  width: 100%
+  position: absolute
+  bottom: 0
+  left: 0
+  z-index: 10
+
+  .authorArea
+    display: flex
+    align-items: center
+    width: 150px
+    height: 100%
+    position: absolute
+    left: 12px
+    bottom: 0px
+
+    h1
+      color: #fff
+      font-size: 14px
+      line-height: 1.4
+      margin: 0
+
+  button.btn
+    margin: 5px 10px
+    padding: 0px 30px
+    width: 120px
+    height: 35px
+    background-image: linear-gradient(-45deg, rgba(233, 30, 99, 0.53) 30%, #ff6a3b)
+
+  p.info
+    font-size: 13px
+    margin: 0
+    line-height: 1.2
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6)
+
+// RWD
+@media only screen and (max-width: 768px)
+  #editor
+    display: flex
+    flex-direction: column
+
+  #editor div, textarea
+    width: 100%
+
+  .controllerArea
+    .authorArea
+      left: auto
+      right: 0px
+
+img
+  vertical-align: middle
+  border-style: none
+  width: auto
+  max-width: 100%

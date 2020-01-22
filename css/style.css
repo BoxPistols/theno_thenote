@@ -1,0 +1,253 @@
+@charset "UTF-8";
+.org_modal {
+  position: fixed;
+  color: #000;
+  width: 100vw;
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  top: 20%; }
+  .org_modal .m_modal_overlay {
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    position: fixed;
+    top: 0 !important;
+    left: 0 !important;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 30;
+    color: #333;
+    text-align: center; }
+  .org_modal .m_modal_window {
+    max-width: 800px;
+    width: 80%;
+    min-height: 300px;
+    max-height: 80%;
+    height: auto;
+    position: fixed;
+    border: 2px solid #00B2BF;
+    padding: 30px 30px 15px;
+    background-color: #fff;
+    display: none;
+    z-index: 50;
+    color: #333;
+    border-radius: 5px;
+    overflow-y: scroll; }
+    .org_modal .m_modal_window .org_modal_inner {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: auto; }
+    .org_modal .m_modal_window .a_modal_text {
+      font-size: 18px;
+      text-align: left;
+      word-break: break-all;
+      margin-bottom: 10px; }
+  .org_modal .org_button {
+    display: flex;
+    flex-direction: column; }
+  .org_modal button {
+    cursor: pointer;
+    outline: none;
+    margin: 10px;
+    text-align: center;
+    height: auto;
+    font-size: 20px;
+    border: solid 2px #00B2BF;
+    transition: 0.3s; }
+    .org_modal button:hover {
+      cursor: pointer;
+      background: #eee; }
+    .org_modal button.m_modal_open {
+      border: 1px solid #00B2BF;
+      padding: 5px;
+      color: #00B2BF;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background: white; }
+    .org_modal button.m_modal_btn-req {
+      width: 100%;
+      height: auto;
+      margin: 20px auto 30px;
+      color: white;
+      background-color: #00B2BF; }
+      .org_modal button.m_modal_btn-req:hover {
+        color: #00B2BF;
+        cursor: pointer;
+        background: white; }
+    .org_modal button.m_modal_btn-close {
+      max-width: 200px;
+      width: 100%;
+      min-height: 60px;
+      height: auto;
+      margin: 10px auto 0;
+      padding: 10px 30px;
+      border-color: #eee;
+      color: gray; }
+  .org_modal .org_modal_mark-close {
+    width: 80%;
+    max-width: 800px;
+    z-index: 80;
+    position: fixed;
+    transform: translate(95%, -50%); }
+    .org_modal .org_modal_mark-close .m_modal_mark-close {
+      border: 1px solid gray;
+      padding: 10px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s; }
+      .org_modal .org_modal_mark-close .m_modal_mark-close span {
+        font-size: 40px;
+        color: gray;
+        margin-top: -8px; }
+      .org_modal .org_modal_mark-close .m_modal_mark-close:hover {
+        cursor: pointer;
+        background: #eee; }
+
+html,
+body,
+#editor {
+  margin: 0;
+  height: 100%;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  color: #333;
+  position: relative; }
+
+textarea,
+#editor div {
+  margin: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50%;
+  height: 100%;
+  height: calc(100% - 50px);
+  vertical-align: top;
+  box-sizing: border-box;
+  padding: 15px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #666; }
+
+textarea {
+  width: 40%;
+  float: left;
+  border: none;
+  border-right: 1px solid #ccc;
+  resize: none;
+  outline: none;
+  background-color: #0b3a31;
+  background-image: linear-gradient(-135deg, #93f5ea, #2f1df7);
+  font-size: 16px;
+  padding: 20px;
+  line-height: 1.4; }
+
+#editor div {
+  width: 60%;
+  float: right;
+  background-image: linear-gradient(135deg, #f77f31 20%, #ffc46e 100%);
+  line-height: 1.5;
+  overflow-x: scroll; }
+  #editor div code {
+    color: #009688;
+    background-color: #f9f9f99c;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 0px;
+    padding: 2px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 0 #ccc; }
+  #editor div h1 {
+    font-size: 3em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 0.15em; }
+  #editor div h2 {
+    font-size: 2.2em; }
+  #editor div h3 {
+    font-size: 1.8em; }
+  #editor div h1 + h5 {
+    font-size: 3.5em; }
+    #editor div h1 + h5 h1 {
+      font-size: 0; }
+  #editor div li {
+    list-style-type: square;
+    margin-left: 1.25em; }
+  #editor div p {
+    line-height: 1.3; }
+  #editor div hr {
+    border: dashed 1px rgba(255, 255, 255, 0.7); }
+  #editor div em {
+    font-weight: bold; }
+  #editor div ol li {
+    list-style-type: decimal; }
+  #editor div a {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    text-decoration: none;
+    transition: 0.2s; }
+    #editor div a:hover {
+      text-decoration: none;
+      color: #daedff;
+      border-bottom: 1px solid #7bc0ff; }
+
+.controllerArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(-45deg, #f9da00fa, #20adffd1);
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10; }
+  .controllerArea .authorArea {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 100%;
+    position: absolute;
+    left: 12px;
+    bottom: 0px; }
+    .controllerArea .authorArea h1 {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0; }
+  .controllerArea button.btn {
+    margin: 5px 10px;
+    padding: 0px 30px;
+    width: 120px;
+    height: 35px;
+    background-image: linear-gradient(-45deg, rgba(233, 30, 99, 0.53) 30%, #ff6a3b); }
+  .controllerArea p.info {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+
+@media only screen and (max-width: 768px) {
+  #editor {
+    display: flex;
+    flex-direction: column; }
+
+  #editor div, textarea {
+    width: 100%; }
+
+  .controllerArea .authorArea {
+    left: auto;
+    right: 0px; } }
+img {
+  vertical-align: middle;
+  border-style: none;
+  width: auto;
+  max-width: 100%; }
+
+/*# sourceMappingURL=style.css.map */
